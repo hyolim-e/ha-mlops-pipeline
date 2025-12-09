@@ -1,0 +1,6 @@
+*.DS_Store*
+*.venv*
+*.joblib*
+*.pyc*
+*test_env*
+*.pytest_cache*

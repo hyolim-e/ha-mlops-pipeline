@@ -1,0 +1,5 @@
+# Lab 1-2: Hello World Pipeline
+# Python 패키지 요구사항
+
+# Kubeflow Pipelines SDK v2
+kfp>=2.0.0

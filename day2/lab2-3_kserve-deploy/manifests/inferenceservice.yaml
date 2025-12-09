@@ -1,0 +1,29 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: california-model
+  namespace: kubeflow-user01
+  annotations:
+    serving.kserve.io/s3-endpoint: "s3.amazonaws.com"
+    serving.kserve.io/s3-region: "ap-northeast-2"
+    serving.kserve.io/s3-usehttps: "1"
+    serving.kserve.io/s3-useanoncredential: "false"
+spec:
+  predictor:
+    serviceAccountName: default
+    model:
+      modelFormat:
+        name: sklearn
+      storageUri: "s3://mlops-training-user01/mlflow-artifacts/1/YOUR-RUN-ID/artifacts/model"
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "500m"
+        limits:
+          memory: "1Gi"
+          cpu: "1000m"
+      envFrom:
+      - secretRef:
+          name: aws-s3-credentials
+      - configMapRef:
+          name: s3-config

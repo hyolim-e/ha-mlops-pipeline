@@ -1,0 +1,22 @@
+# ============================================================
+# Lab 2-1: FastAPI 모델 서빙 - Kubernetes Service
+# ============================================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-api-svc
+  namespace: ${NAMESPACE}
+  labels:
+    app: iris-api
+    component: model-serving
+    lab: lab2-1
+spec:
+  type: ClusterIP
+  selector:
+    app: iris-api
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+    protocol: TCP
